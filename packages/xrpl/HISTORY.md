@@ -7,6 +7,11 @@ Subscribe to [the **xrpl-announce** mailing list](https://groups.google.com/g/xr
 ### Added
 * Add new fields to `ServerDefinitionsResponse`: `ACCOUNT_SET_FLAGS`, `LEDGER_ENTRY_FLAGS`, `LEDGER_ENTRY_FORMATS`, `TRANSACTION_FLAGS`, and `TRANSACTION_FORMATS`, reflecting new sections returned by `server_definitions` in rippled.
 
+## 5.0.0 (2026-03-19)
+
+### Breaking Changes
+* Replace deprecated `convertStringToHex` and `convertHexToString` functions with modern equivalents `stringToHex` and `hexToString`. The new functions are imported from `@xrplf/isomorphic/utils`. While the old function names remain re-exported from the xrpl package for backward compatibility, they are deprecated and will be removed in a future major version. Direct usage throughout the codebase has been updated to use the new function names.
+
 ## 4.6.0 (2026-02-12)
 
 ### Added
