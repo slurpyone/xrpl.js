@@ -20,8 +20,8 @@ import FeeSettings, {
 import {
   Ledger,
   LedgerV1,
-  LedgerTransactionExpanded,
   LedgerTransactionExpandedV1,
+  LedgerTransactionExpandedV2,
 } from './Ledger'
 import { LedgerEntry, LedgerEntryFilter } from './LedgerEntry'
 import LedgerHashes from './LedgerHashes'
@@ -63,8 +63,8 @@ export {
   FeeSettingsPostAmendmentFields,
   Ledger,
   LedgerV1,
-  LedgerTransactionExpanded,
   LedgerTransactionExpandedV1,
+  LedgerTransactionExpandedV2,
   LedgerEntryFilter,
   LedgerEntry,
   LedgerHashes,

@@ -3,13 +3,13 @@ import { assert } from 'chai'
 import {
   Ledger,
   LedgerV1,
-  LedgerTransactionExpanded,
   LedgerTransactionExpandedV1,
+  LedgerTransactionExpandedV2,
 } from '../../src/models/ledger/Ledger'
 
 describe('LedgerTransactionExpanded types', function () {
-  it('Ledger (v2) transactions use flat format with metaData', function () {
-    const tx: LedgerTransactionExpanded = {
+  it('LedgerV1 (API v1) transactions use flat format with metaData', function () {
+    const tx: LedgerTransactionExpandedV1 = {
       Account: 'rPrioTXJgZJF8bpdXq2X73PcVPfvYqjVKd',
       Amount: '1000000',
       Destination: 'rsRy14FvipgqudiGmptJBhr1RtpsgfzKMM',
@@ -27,13 +27,13 @@ describe('LedgerTransactionExpanded types', function () {
       },
     }
 
-    // Verify v2 expanded transactions are assignable to Ledger.transactions
-    const ledgerV2: Pick<Ledger, 'transactions'> = {
+    // Verify v1 expanded transactions are assignable to LedgerV1.transactions
+    const ledgerV1: Pick<LedgerV1, 'transactions'> = {
       transactions: [tx],
     }
 
-    assert.isArray(ledgerV2.transactions)
-    const firstTx = ledgerV2.transactions![0]
+    assert.isArray(ledgerV1.transactions)
+    const firstTx = ledgerV1.transactions![0]
     assert.notEqual(typeof firstTx, 'string')
     if (typeof firstTx !== 'string') {
       assert.strictEqual(firstTx.hash, tx.hash)
@@ -41,19 +41,19 @@ describe('LedgerTransactionExpanded types', function () {
     }
   })
 
-  it('Ledger transactions can also be hash strings', function () {
-    const ledgerV2: Pick<Ledger, 'transactions'> = {
+  it('LedgerV1 transactions can also be hash strings', function () {
+    const ledgerV1: Pick<LedgerV1, 'transactions'> = {
       transactions: [
         '044314FE34236A262DA692789CE5B48CA1A3CEC078B1A4ECCD65F4B61A9EB0A7',
       ],
     }
 
-    assert.isArray(ledgerV2.transactions)
-    assert.strictEqual(typeof ledgerV2.transactions![0], 'string')
+    assert.isArray(ledgerV1.transactions)
+    assert.strictEqual(typeof ledgerV1.transactions![0], 'string')
   })
 
-  it('LedgerV1 transactions use wrapped format with tx_json and meta', function () {
-    const tx: LedgerTransactionExpandedV1 = {
+  it('Ledger (API v2) transactions use wrapped format with tx_json and meta', function () {
+    const tx: LedgerTransactionExpandedV2 = {
       tx_json: {
         Account: 'rPrioTXJgZJF8bpdXq2X73PcVPfvYqjVKd',
         Amount: '1000000',
@@ -78,13 +78,13 @@ describe('LedgerTransactionExpanded types', function () {
         '058FDA696458896EC515AC19C3EDC8CD0E163A3620CA6B314165E5BAED70846A',
     }
 
-    // Verify v1 expanded transactions are assignable to LedgerV1.transactions
-    const ledgerV1: Pick<LedgerV1, 'transactions'> = {
+    // Verify v2 expanded transactions are assignable to Ledger.transactions
+    const ledgerV2: Pick<Ledger, 'transactions'> = {
       transactions: [tx],
     }
 
-    assert.isArray(ledgerV1.transactions)
-    const firstTx = ledgerV1.transactions![0]
+    assert.isArray(ledgerV2.transactions)
+    const firstTx = ledgerV2.transactions![0]
     assert.notEqual(typeof firstTx, 'string')
     if (typeof firstTx !== 'string') {
       assert.strictEqual(firstTx.hash, tx.hash)
